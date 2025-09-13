@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Reveal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-reveal-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1f2937; /* A subtle dark gray to match the theme */
+            transform: scaleX(1);
+            transform-origin: left;
+            transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1); /* Custom ease for smooth animation */
+        }
+        
+        .image-reveal-mask.animate {
+            transform: scaleX(0);
+        }
+
+        .image-reveal-img {
+            opacity: 0;
+            transition: opacity 0.5s ease-out 0.8s; /* Delayed fade-in */
+        }
+
+        .image-reveal-mask.animate + .image-reveal-img {
+            opacity: 1;
+        }
+
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-animation.delay-100 { transition-delay: 0.1s; }
+        .scroll-animation.delay-200 { transition-delay: 0.2s; }
+        .scroll-animation.delay-300 { transition-delay: 0.3s; }
+        .scroll-animation.delay-400 { transition-delay: 0.4s; }
+        
+        /* New and improved button hover effect */
+        .hover-glow-pulse {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(4, 120, 255, 0);
+        }
+
+        .hover-glow-pulse:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(4, 120, 255, 0.7);
+        }
+
+        .hover-glow-pulse::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            border-radius: 9999px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 200%;
+            opacity: 0;
+            transition: opacity 0.3s ease, background-position 0.3s ease;
+        }
+
+        .hover-glow-pulse:hover::before {
+            opacity: 1;
+            background-position: 100% 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+        <!-- Footer -->
+    <footer class="py-8 bg-[#0a0d11] text-center text-gray-500">
+        <p class="text-sm">&copy; 2024 Interactive Designs. All Rights Reserved.</p>
+    </footer>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
