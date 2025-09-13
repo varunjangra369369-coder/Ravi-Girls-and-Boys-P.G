@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h2>Message from Django</h2>
+    <p style="font-size: 1.2rem; text-align: center; color: #1976d2;">{{ greeting }}</p>
+</section>
+<section>
+    <h2>About</h2>
+    <p>This is a simple Django-powered website with custom styling.</p>
+</section>
+<section>
+    <h2>Contact</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</section>
+{% endblock %}
